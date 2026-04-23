@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Post } from '../post';
-
+import { Post } from '../../models/post';
 @Component({
   selector: 'app-post-detail',
   standalone: true,

@@ -1,8 +1,13 @@
-<h2 class="section-title">Lista de posts</h2>
+<h2>Lista de posts</h2>
 
-<div class="post-list">
-    <button *ngFor="let post of posts" class="post-button" (click)="seleccionarPost(post)"
-        [ngClass]="{ active: selectedId === post.id }">
+<p>Total posts: {{ posts.length }}</p>
+
+<p *ngIf="cargando">Cargando...</p>
+<p *ngIf="error">{{ error }}</p>
+
+<div class="post-list" *ngIf="!cargando && !error">
+    <button *ngFor="let post of posts; trackBy: trackByPostId" type="button" class="post-button"
+        [class.selected]="selectedId === post.id" (click)="seleccionarPost(post)">
         {{ post.title }}
     </button>
 </div>

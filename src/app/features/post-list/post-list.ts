@@ -1,29 +1,54 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Post } from '../post';
+import { Post } from '../../models/post';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-post-list',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './post-list.html',
-  styleUrl: './post-list.css'
+  styleUrls: ['./post-list.css']
 })
-export class PostListComponent {
-
+export class PostListComponent implements OnInit {
   @Output() postSeleccionado = new EventEmitter<Post>();
 
-  // 🔥 IMPORTANTE (esto faltaba o está mal)
   selectedId: number | null = null;
+  posts: Post[] = [];
+  cargando = true;
+  error = '';
 
-  posts: Post[] = [
-    { id: 1, title: 'Post 1', body: 'Contenido del post 1' },
-    { id: 2, title: 'Post 2', body: 'Contenido del post 2' },
-    { id: 3, title: 'Post 3', body: 'Contenido del post 3' }
-  ];
+  constructor(
+    private postService: PostService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+  ngOnInit(): void {
+    console.log('Cargando desde API...');
+
+    this.postService.getPosts().subscribe({
+      next: (data) => {
+        console.log('API OK:', data);
+        this.posts = data;
+        this.cargando = false;
+        console.log('LARGO POSTS:', this.posts.length);
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error al cargar posts:', err);
+        this.error = 'No se pudieron cargar los posts.';
+        this.cargando = false;
+        this.cdr.detectChanges();
+      }
+    });
+  }
 
   seleccionarPost(post: Post): void {
     this.selectedId = post.id;
     this.postSeleccionado.emit(post);
+  }
+
+  trackByPostId(index: number, post: Post): number {
+    return post.id;
   }
 }
