@@ -1,9 +1,8 @@
-<h2>Lista de posts</h2>
+<h2 class="section-title">Lista de posts</h2>
 
-<ul>
-    <li *ngFor="let post of posts">
-        <button (click)="seleccionarPost(post)">
-            {{ post.title }}
-        </button>
-    </li>
-</ul>
+<div class="post-list">
+    <button *ngFor="let post of posts" class="post-button" (click)="seleccionarPost(post)"
+        [ngClass]="{ active: selectedId === post.id }">
+        {{ post.title }}
+    </button>
+</div>

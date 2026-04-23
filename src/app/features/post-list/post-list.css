@@ -1,0 +1,39 @@
+.section-title {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #0f172a;
+}
+
+/* CONTENEDOR */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* BOTÓN BASE */
+.post-button {
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  background: white;
+  border-radius: 12px;
+  padding: 14px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 500;
+  color: #0f172a;
+  transition: all 0.2s ease;
+}
+
+/* HOVER */
+.post-button:hover {
+  background: #f1f5f9;
+}
+
+/* ACTIVO NAVY (lo que querías) */
+.post-button.active {
+  background: #1e3a8a; /* azul navy */
+  color: white;
+  border-color: #1e3a8a;
+}

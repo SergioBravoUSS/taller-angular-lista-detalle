@@ -1,7 +1,30 @@
-<h1>Taller Angular - Lista y detalle</h1>
+<div class="page">
+    <div class="container">
+        <header class="header">
+            <div class="meta">
+                <span class="badge">S8 Taller Sumativo</span>
+            </div>
 
-<app-post-list (postSeleccionado)="recibirPost($event)"></app-post-list>
+            <h1>Taller Angular - Lista y detalle</h1>
 
-<hr>
+            <p class="subtitle">
+                Selecciona un post para ver su información detallada.
+            </p>
 
-<app-post-detail [post]="postActual"></app-post-detail>
+            <div class="info">
+                <div><strong>Profesor:</strong> Rodolfo Aravena Collipal</div>
+                <div><strong>Estudiante:</strong> Sergio Rodrigo Bravo Saez</div>
+            </div>
+        </header>
+
+        <div class="layout">
+            <section class="panel">
+                <app-post-list (postSeleccionado)="recibirPost($event)"></app-post-list>
+            </section>
+
+            <section class="panel">
+                <app-post-detail [post]="postActual"></app-post-detail>
+            </section>
+        </div>
+    </div>
+</div>

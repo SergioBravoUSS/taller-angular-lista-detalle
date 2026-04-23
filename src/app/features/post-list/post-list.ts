@@ -10,7 +10,11 @@ import { Post } from '../post';
   styleUrl: './post-list.css'
 })
 export class PostListComponent {
+
   @Output() postSeleccionado = new EventEmitter<Post>();
+
+  // 🔥 IMPORTANTE (esto faltaba o está mal)
+  selectedId: number | null = null;
 
   posts: Post[] = [
     { id: 1, title: 'Post 1', body: 'Contenido del post 1' },
@@ -19,6 +23,7 @@ export class PostListComponent {
   ];
 
   seleccionarPost(post: Post): void {
+    this.selectedId = post.id;
     this.postSeleccionado.emit(post);
   }
 }
