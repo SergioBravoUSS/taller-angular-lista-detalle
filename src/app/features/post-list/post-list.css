@@ -31,9 +31,9 @@
   background: #f1f5f9;
 }
 
-/* ACTIVO NAVY (lo que querías) */
-.post-button.active {
-  background: #1e3a8a; /* azul navy */
+/* 🔥 SELECCIONADO NAVY */
+.post-button.selected {
+  background: #1e3a8a;
   color: white;
   border-color: #1e3a8a;
 }

@@ -24,24 +24,34 @@ export class PostListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('Cargando desde API...');
+  console.log('Cargando desde API...');
 
-    this.postService.getPosts().subscribe({
-      next: (data) => {
-        console.log('API OK:', data);
-        this.posts = data;
-        this.cargando = false;
-        console.log('LARGO POSTS:', this.posts.length);
-        this.cdr.detectChanges();
-      },
-      error: (err) => {
-        console.error('Error al cargar posts:', err);
-        this.error = 'No se pudieron cargar los posts.';
-        this.cargando = false;
-        this.cdr.detectChanges();
-      }
-    });
-  }
+  this.postService.getPosts().subscribe({
+    next: (data) => {
+      console.log('API OK:', data);
+
+      // 🔥 Mezclar (copia para no mutar el original)
+      const mezclados = [...data].sort(() => Math.random() - 0.5);
+
+      // 🔥 Tomar solo 5
+      this.posts = mezclados.slice(0, 5);
+
+      this.cargando = false;
+
+      console.log('POSTS RANDOM:', this.posts);
+      console.log('LARGO POSTS:', this.posts.length);
+
+      this.cdr.detectChanges();
+    },
+    error: (err) => {
+      console.error('Error al cargar posts:', err);
+      this.error = 'No se pudieron cargar los posts.';
+      this.cargando = false;
+      this.cdr.detectChanges();
+    }
+  });
+}
+
 
   seleccionarPost(post: Post): void {
     this.selectedId = post.id;
