@@ -1,0 +1,7 @@
+<h1>Taller Angular - Lista y detalle</h1>
+
+<app-post-list (postSeleccionado)="recibirPost($event)"></app-post-list>
+
+<hr>
+
+<app-post-detail [post]="postActual"></app-post-detail>

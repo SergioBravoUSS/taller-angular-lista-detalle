@@ -1,0 +1,11 @@
+<h2>Detalle del post</h2>
+
+<div *ngIf="post; else sinSeleccion">
+    <p><strong>ID:</strong> {{ post.id }}</p>
+    <p><strong>Título:</strong> {{ post.title }}</p>
+    <p><strong>Contenido:</strong> {{ post.body }}</p>
+</div>
+
+<ng-template #sinSeleccion>
+    <p>No hay ningún post seleccionado.</p>
+</ng-template>
